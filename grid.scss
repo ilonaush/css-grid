@@ -18,7 +18,7 @@ html {
 }
 
 @mixin size-container($breakpoint) {
-    @if ($breakpoint > 1200) {
+    @if ($breakpoint == 1200) {
         .container {
             width: $max-width;
         }
@@ -117,7 +117,8 @@ html {
 }
 
 @media (min-width: 1200px) {
-    @include make-columns($column_number, 1200);    
+    @include make-columns($column_number, 1200); 
+    @include size-container(1200);   
 }
 
 
