@@ -1,0 +1,124 @@
+$column_number: 12;
+$gutters: 30px;
+$max-width: 1024px;
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:after, *:before {
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 0 $gutters / 2;
+    max-width: $max-width;
+    margin:  0 auto;
+    height: 100%;
+}
+
+@mixin size-container($breakpoint) {
+    @if ($breakpoint > 1200) {
+        .container {
+            width: $max-width;
+        }
+    }
+
+    @if ($breakpoint == 992) {
+        .container {
+            width: 960px;
+            max-width: 100%;
+        }
+    }
+
+    @if ($breakpoint == 768) {
+        .container {
+            width: 720px;
+            max-width: 100%;
+        }
+    }
+
+    @if ($breakpoint == 576) {
+        .container {
+            width: 540px;
+            max-width: 100%;
+        }
+    }
+ }
+
+
+.row {
+    display: flex;
+    margin-left: -$gutters / 2;
+    margin-right: -$gutters / 2;
+    flex-wrap: wrap;
+}
+
+[class*="col-"] {
+    padding: 0 ($gutters / 2);
+}
+
+@mixin make-columns($column_number, $breakpoint) {
+  @for $i from 1 through $column_number {
+    $width: 100% / 12 *  $i;
+
+    @if ($breakpoint > 1200) {
+        .col-#{$i} {
+            flex: 0 0 $width;
+        }
+    }
+    @if ($breakpoint == 1200) {
+        .col-xl-#{$i} {
+            flex: 0 0 $width;
+        }
+    } 
+    
+    @if ($breakpoint == 992) {
+        .col-lg-#{$i} {
+            flex: 0 0 $width;
+        }
+
+    }
+
+    @if ($breakpoint == 768) {
+        .col-md-#{$i} {
+            flex: 0 0 $width;
+        }
+
+    }
+
+    @if ($breakpoint == 576) {
+        .col-sm-#{$i} {
+            flex: 0 0 $width;
+        }
+
+    }
+    }
+}
+
+
+@include make-columns(12, 1202);
+
+
+@media (min-width: 576px) {
+    @include make-columns($column_number, 576);  
+    @include size-container(576);  
+}
+
+@media (min-width: 768px) {
+    @include make-columns($column_number, 768); 
+    @include size-container(768);  
+    
+}
+
+@media (min-width: 992px) {
+    @include make-columns($column_number, 992);    
+    @include size-container(992);      
+}
+
+@media (min-width: 1200px) {
+    @include make-columns($column_number, 1200);    
+}
+
+
+
